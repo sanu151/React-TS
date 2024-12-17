@@ -112,3 +112,67 @@ export default Greeting;
 * **Built-in TypeScript Support:** Vite offers built-in support for TypeScript, including type checking and code completion.
 * **Vite's Performance:** Vite is known for its fast build times and efficient development server.
 
+### Built-in prop types in React TypeScript.
+
+**1. Using Basic Data Types Directly**
+
+* You can directly use primitive data types like `string`, `number`, `boolean`, `null`, `undefined` as prop types.
+
+**Example:**
+
+```typescript
+import React from 'react';
+
+interface MyComponentProps {
+  name: string; 
+  age: number; 
+  isActive: boolean;
+  optionalValue?: string; // Optional string prop
+}
+
+const MyComponent: React.FC<MyComponentProps> = ({ name, age, isActive, optionalValue }) => {
+  return (
+    <div>
+      <p>Name: {name}</p>
+      <p>Age: {age}</p>
+      <p>Is Active: {isActive ? 'Yes' : 'No'}</p>
+      {optionalValue && <p>Optional Value: {optionalValue}</p>} 
+    </div>
+  );
+};
+
+export default MyComponent;
+```
+
+In this example:
+
+* `name` is expected to be a string.
+* `age` is expected to be a number.
+* `isActive` is expected to be a boolean.
+* `optionalValue` is optional and can be a string.
+
+**2. Using Arrays and Objects**
+
+* You can also use arrays and objects as prop types.
+
+**Example:**
+
+```typescript
+interface MyComponentProps {
+  names: string[]; // Array of strings
+  user: { 
+    id: number;
+    username: string;
+  }; 
+}
+
+const MyComponent: React.FC<MyComponentProps> = ({ names, user }) => { 
+  // ...
+};
+```
+
+**Key Points:**
+
+* TypeScript will infer the types of props if you don't explicitly define them, but it's always a good practice to define them for better code readability and maintainability.
+* Using these basic data types directly provides a clear and concise way to define the expected props for your React components.
+
