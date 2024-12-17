@@ -257,6 +257,7 @@ const Button: React.FC<ButtonProps> = ({ label, onClick, variant = 'primary' }) 
 
 ### Table summarizing built-in and user-defined prop types in React TypeScript:
 
+
 | Category | Prop Type | Description | Example |
 |---|---|---|---|
 | **Built-in** | `React.HTMLAttributes<HTMLDivElement>` | Props for HTML `<div>` element. Includes `id`, `className`, `style`, event handlers, etc. | `<div {...props}>...</div>` |
@@ -267,9 +268,50 @@ const Button: React.FC<ButtonProps> = ({ label, onClick, variant = 'primary' }) 
 | **Built-in** | `boolean` | Boolean values (true/false) | `isActive: boolean;` |
 | **Built-in** | `array` | Arrays of values (e.g., `string[]`, `number[]`) | `names: string[];` |
 | **Built-in** | `object` | Objects with specific properties | `user: { id: number; name: string; };` |
+| **Built-in** | `any` | Allows any type | `value: any;` |
 | **User-Defined** | `interface MyProps` | Custom interface defining prop shapes | `interface MyProps { name: string; age: number; };` |
 | **User-Defined** | `type MyProps` | Type alias defining prop shapes | `type MyProps = { name: string; age: number; };` |
+| **User-Defined** | `enum MyStatus` | Defines a set of named constants | `enum MyStatus { Pending, Approved, Rejected }` |
+| **User-Defined** | `union` | Combines multiple types | `type MyColor = 'red' | 'green' | 'blue';` |
+| **User-Defined** | `custom type` | Creates a reusable type for complex objects | `type User = { id: number; name: string; email: string; };` |
 
+
+* **`enum`:** Defines a set of named constants. For example:
+   ```typescript
+   enum MyStatus { 
+       Pending, 
+       Approved, 
+       Rejected 
+   }
+
+   interface MyItemProps {
+       status: MyStatus; 
+   } 
+   ```
+
+* **`union`:** Combines multiple types into a single type. For example:
+   ```typescript
+   type MyColor = 'red' | 'green' | 'blue'; 
+
+   interface MyBoxProps {
+       color: MyColor; 
+   }
+   ```
+
+* **`any`:** Allows any type of value to be assigned to a variable. **Use with caution**, as it can undermine type safety.
+
+* **`custom type`:** Creates a reusable type for complex objects. This improves code readability and maintainability.
+   ```typescript
+   type User = { 
+       id: number; 
+       name: string; 
+       email: string; 
+   };
+
+   interface MyUserCardProps {
+       user: User; 
+   }
+   ```
 
 **Key Differences:**
 
