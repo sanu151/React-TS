@@ -255,3 +255,32 @@ const Button: React.FC<ButtonProps> = ({ label, onClick, variant = 'primary' }) 
 };
 ```
 
+### Table summarizing built-in and user-defined prop types in React TypeScript:
+
+| Category | Prop Type | Description | Example |
+|---|---|---|---|
+| **Built-in** | `React.HTMLAttributes<HTMLDivElement>` | Props for HTML `<div>` element. Includes `id`, `className`, `style`, event handlers, etc. | `<div {...props}>...</div>` |
+| **Built-in** | `React.SVGAttributes<SVGCircleElement>` | Props for SVG `<circle>` element. Includes `cx`, `cy`, `r`, `fill`, `stroke`, etc. | `<circle {...props} />` |
+| **Built-in** | `React.AnchorHTMLAttributes<HTMLAnchorElement>` | Props for HTML `<a>` (anchor) element. Includes `href`, `target`, `rel`, etc. | `<a {...props}>...</a>` |
+| **Built-in** | `string` | String values | `name: string;` |
+| **Built-in** | `number` | Numeric values | `age: number;` |
+| **Built-in** | `boolean` | Boolean values (true/false) | `isActive: boolean;` |
+| **Built-in** | `array` | Arrays of values (e.g., `string[]`, `number[]`) | `names: string[];` |
+| **Built-in** | `object` | Objects with specific properties | `user: { id: number; name: string; };` |
+| **User-Defined** | `interface MyProps` | Custom interface defining prop shapes | `interface MyProps { name: string; age: number; };` |
+| **User-Defined** | `type MyProps` | Type alias defining prop shapes | `type MyProps = { name: string; age: number; };` |
+
+
+**Key Differences:**
+
+* **Built-in:** Provided by React for common HTML/SVG elements and basic data types.
+* **User-Defined:** Created by the developer to define custom prop structures for specific components.
+
+**Benefits of Using Prop Types:**
+
+* **Type Safety:** Prevents unexpected behavior and runtime errors.
+* **Improved Readability:** Makes code more self-documenting and easier to understand.
+* **Better IDE Support:** Enables better code completion, type checking, and refactoring.
+* **Maintainability:** Enhances code maintainability and reduces the risk of errors.
+
+
