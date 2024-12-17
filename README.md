@@ -176,3 +176,82 @@ const MyComponent: React.FC<MyComponentProps> = ({ names, user }) => {
 * TypeScript will infer the types of props if you don't explicitly define them, but it's always a good practice to define them for better code readability and maintainability.
 * Using these basic data types directly provides a clear and concise way to define the expected props for your React components.
 
+### User-Defined Prop Types in React TypeScript
+
+In React TypeScript, you can define your own custom prop types using interfaces or type aliases. This allows you to create reusable and type-safe prop definitions for your components.
+
+**1. Using Interfaces**
+
+* Interfaces are a common way to define the structure and types of objects in TypeScript.
+
+**Example:**
+
+```typescript
+interface UserProps {
+  name: string;
+  age: number;
+  email: string;
+}
+
+const User: React.FC<UserProps> = ({ name, age, email }) => {
+  return (
+    <div>
+      <h2>{name}</h2>
+      <p>Age: {age}</p>
+      <p>Email: {email}</p>
+    </div>
+  );
+};
+```
+
+In this example, the `UserProps` interface defines the expected props for the `User` component.
+
+**2. Using Type Aliases**
+
+* Type aliases provide another way to create custom types.
+
+**Example:**
+
+```typescript
+type ProductProps = {
+  name: string;
+  price: number;
+  description?: string; // Optional property
+};
+
+const Product: React.FC<ProductProps> = ({ name, price, description }) => {
+  return (
+    <div>
+      <h2>{name}</h2>
+      <p>Price: ${price}</p>
+      {description && <p>{description}</p>}
+    </div>
+  );
+};
+```
+
+**Benefits of User-Defined Prop Types:**
+
+* **Improved Type Safety:** Ensures that components receive the correct types of props, preventing unexpected behavior and runtime errors.
+* **Enhanced Code Readability:** Makes the code more self-documenting and easier to understand.
+* **Better IDE Support:** Provides better code completion, type checking, and refactoring in your IDE.
+* **Code Reusability:** Allows you to reuse the same prop definitions across multiple components.
+
+**Example with Optional and Default Props:**
+
+```typescript
+interface ButtonProps {
+  label: string;
+  onClick?: () => void; // Optional function
+  variant?: 'primary' | 'secondary'; // Optional with default value
+}
+
+const Button: React.FC<ButtonProps> = ({ label, onClick, variant = 'primary' }) => {
+  return (
+    <button onClick={onClick} className={`button ${variant}`}>
+      {label}
+    </button>
+  );
+};
+```
+
