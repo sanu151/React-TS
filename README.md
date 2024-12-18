@@ -325,4 +325,72 @@ const Button: React.FC<ButtonProps> = ({ label, onClick, variant = 'primary' }) 
 * **Better IDE Support:** Enables better code completion, type checking, and refactoring.
 * **Maintainability:** Enhances code maintainability and reduces the risk of errors.
 
+### Array of user objects as props. 
+
+**Each user object will have two properties: `name` (a string) and `age` (a number).**
+
+First, we define our user type and the props type for our component. Then, we create a functional component that renders the list of users. Here's the complete example:
+
+```tsx
+import React from 'react';
+
+// Define the User type
+type User = {
+  name: string;
+  age: number;
+};
+
+// Define the props type for the component
+type UserListProps = {
+  users: User[];
+};
+
+// Create the UserList component
+const UserList: React.FC<UserListProps> = ({ users }) => {
+  return (
+    <div>
+      <h1>User List</h1>
+      <ul>
+        {users.map((user, index) => (
+          <li key={index}>
+            {user.name}, {user.age} years old
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+// Example usage of the UserList component
+const App: React.FC = () => {
+  const users: User[] = [
+    { name: 'Alice', age: 30 },
+    { name: 'Bob', age: 25 }
+  ];
+
+  return (
+    <div>
+      <UserList users={users} />
+    </div>
+  );
+};
+
+export default App;
+```
+
+### Explanation:
+
+1. **User Type Definition:**
+   We define a `User` type with `name` and `age` properties.
+
+2. **Props Type Definition:**
+   We define a `UserListProps` type that has a `users` property, which is an array of `User` objects.
+
+3. **UserList Component:**
+   - The `UserList` component is a functional component that takes `UserListProps` as its props.
+   - It renders a list of users using the `map` function.
+
+4. **App Component:**
+   - The `App` component provides an example of how to use the `UserList` component.
+   - It creates an array of user objects and passes it to the `UserList` component as a prop.
 
