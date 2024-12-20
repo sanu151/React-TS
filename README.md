@@ -537,4 +537,53 @@ export default App;
 
 Typing `children` helps ensure that the components you pass as children are valid React nodes, which improves type safety and developer experience. It also makes the code more readable and maintainable.
 
-By using `ReactNode`, you cover all possible types of children that can be passed to a component, making your components more robust and versatile.
+## **Typing `useState` Hook in React TypeScript**
+
+When using the `useState` hook in React TypeScript, it's essential to provide type information for the state and setter function. This ensures type safety and helps prevent potential runtime errors.
+
+**Basic Usage:**
+
+```typescript
+import React, { useState } from "react";
+
+function MyComponent() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+}
+```
+
+In this example, `useState(0)` returns an array with two elements:
+
+1. **`count`:** The current state value, initially set to `0`. TypeScript infers its type as `number`.
+2. **`setCount`:** A function to update the state. It takes a new value of type `number` as an argument.
+
+**Explicit Typing:**
+
+While TypeScript often infers types correctly, you can explicitly declare them for better readability and maintainability:
+
+```typescript
+const [count, setCount] = useState<number>(0);
+```
+
+**Using a Tuple Type:**
+
+For more complex state scenarios, you can use a tuple type to explicitly define the types of the state and setter:
+
+```typescript
+const [user, setUser] = useState<{ name: string; age: number }>({
+  name: "John Doe",
+  age: 30,
+});
+```
+
+**Key Points:**
+
+- **Type Safety:** Explicitly typing the state and setter helps prevent type errors and ensures correct usage.
+- **Readability:** Clear type annotations make the code more understandable.
+- **IDE Support:** Modern IDEs leverage type information to provide better code completion, refactoring, and error highlighting.
