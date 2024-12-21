@@ -654,3 +654,84 @@ In this example, the `App` component passes a style object to the `MyComponent`,
 **Key Points:**
 
 - `React.CSSProperties` provides a type-safe way to define and pass CSS styles to your React components.
+
+### **Typing Events in React TypeScript**
+
+When working with events in React TypeScript, it's crucial to properly type the event handlers to ensure type safety and prevent errors. Here's how you can type events effectively:
+
+**1. Using Built-in Event Types**
+
+- React provides built-in types for common events:
+
+  - `MouseEvent`: For mouse events like `onClick`, `onMouseOver`, `onMouseOut`, etc.
+  - `KeyboardEvent`: For keyboard events like `onKeyDown`, `onKeyUp`, `onKeyPress`.
+  - `ChangeEvent`: For input events like `onChange` (for input, textarea, select elements).
+  - `FocusEvent`: For focus events like `onFocus`, `onBlur`.
+
+**Example:**
+
+```typescript
+import React from "react";
+
+function MyButton() {
+  const handleClick = (event: MouseEvent) => {
+    console.log(event.clientX, event.clientY); // Access mouse coordinates
+  };
+
+  return <button onClick={handleClick}>Click Me</button>;
+}
+```
+
+**2. Extracting Event Types from HTML Elements**
+
+- You can extract the event type from the HTML element type:
+
+```typescript
+import React from "react";
+
+function MyInput() {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.value);
+  };
+
+  return <input type="text" onChange={handleChange} />;
+}
+```
+
+- This ensures that the `event` object has the correct properties for the specific HTML element.
+
+**3. Using Generic Types**
+
+- For more flexibility, you can use generics to define event handlers:
+
+```typescript
+function handleGenericEvent<T extends React.BaseSyntheticEvent>(event: T) {
+  console.log(event.currentTarget);
+}
+
+// Usage:
+<button onClick={handleGenericEvent} />;
+```
+
+- This function can handle any type of React event.
+
+**4. Custom Event Interfaces**
+
+- For complex events or custom events, you can define your own event interfaces:
+
+```typescript
+interface MyCustomEvent extends MouseEvent {
+  customData: string;
+}
+
+const handleClick = (event: MyCustomEvent) => {
+  console.log(event.customData);
+};
+```
+
+**Key Points:**
+
+- Typing events ensures type safety and prevents unexpected behavior.
+- Use the appropriate event type for each event handler.
+- Consider using generics for more flexible event handling.
+- Define custom event interfaces for complex or custom events.
