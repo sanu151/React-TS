@@ -587,3 +587,70 @@ const [user, setUser] = useState<{ name: string; age: number }>({
 - **Type Safety:** Explicitly typing the state and setter helps prevent type errors and ensures correct usage.
 - **Readability:** Clear type annotations make the code more understandable.
 - **IDE Support:** Modern IDEs leverage type information to provide better code completion, refactoring, and error highlighting.
+
+### Typing Style Props
+
+```typescript
+import React, { useState } from "react";
+
+interface MyComponentProps {
+  style?: React.CSSProperties; // Optional CSS style prop
+}
+
+function MyComponent({ style }: MyComponentProps) {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div style={style}>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+}
+
+export default MyComponent;
+```
+
+**Explanation:**
+
+1. **`React.CSSProperties` Interface:**
+
+   - This built-in interface defines the type for CSS styles in React.
+   - It allows you to pass a JavaScript object containing CSS properties as the `style` prop to your component.
+
+2. **`MyComponentProps` Interface:**
+
+   - Defines the props for the `MyComponent`.
+   - `style?: React.CSSProperties;`: This makes the `style` prop optional. If not provided, the component will render with default styles.
+
+3. **Component Usage:**
+   - The `MyComponent` receives the `style` prop.
+   - The `style` prop is then applied to the `div` element using the `style` attribute in JSX.
+
+**Example Usage:**
+
+```typescript
+import MyComponent from "./MyComponent";
+
+function App() {
+  return (
+    <div>
+      <MyComponent
+        style={{
+          backgroundColor: "lightblue",
+          padding: "20px",
+          borderRadius: "5px",
+        }}
+      />
+    </div>
+  );
+}
+
+export default App;
+```
+
+In this example, the `App` component passes a style object to the `MyComponent`, which will then render with the specified background color, padding, and border radius.
+
+**Key Points:**
+
+- `React.CSSProperties` provides a type-safe way to define and pass CSS styles to your React components.
