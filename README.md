@@ -735,3 +735,104 @@ const handleClick = (event: MyCustomEvent) => {
 - Use the appropriate event type for each event handler.
 - Consider using generics for more flexible event handling.
 - Define custom event interfaces for complex or custom events.
+
+
+### Typing Form Event
+
+```typescript
+import React, { useState } from 'react';
+
+interface FormData {
+  firstName: string;
+  lastName: string;
+}
+
+function MyForm() {
+  const [formData, setFormData] = useState<FormData>({
+    firstName: '',
+    lastName: '',
+  });
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value, 
+    }));
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault(); // Prevent default form submission behavior
+
+    // Process form data here (e.g., send to server)
+    console.log(formData); 
+
+    // Reset form (optional)
+    setFormData({
+      firstName: '',
+      lastName: '',
+    });
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="firstName">First Name:</label>
+        <input
+          type="text"
+          id="firstName"
+          name="firstName"
+          value={formData.firstName}
+          onChange={handleChange}
+        />
+      </div>
+      <div>
+        <label htmlFor="lastName">Last Name:</label>
+        <input
+          type="text"
+          id="lastName"
+          name="lastName"
+          value={formData.lastName}
+          onChange={handleChange}
+        />
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+
+export default MyForm;
+```
+
+**Explanation:**
+
+1. **`FormData` Interface:**
+   - Defines the structure of the form data, ensuring type safety for the state.
+
+2. **`useState`:**
+   - Initializes the `formData` state with an empty object.
+
+3. **`handleChange`:**
+   - Handles input changes.
+   - Extracts `name` and `value` from the event target.
+   - Updates the `formData` state using the spread syntax and dynamic property access.
+
+4. **`handleSubmit`:**
+   - Handles form submission.
+   - `event.preventDefault()` prevents the default form submission behavior (page refresh).
+   - Processes the form data (e.g., send to server).
+   - Optionally resets the form state.
+
+5. **JSX:**
+   - The form elements are rendered with appropriate attributes:
+     - `name` attribute for input fields to match the state property names.
+     - `value` attribute to bind input values to the state.
+     - `onChange` event handler to update the state on input changes.
+
+**Key Points:**
+
+- **Type Safety:** The use of interfaces and explicit typing ensures that the form data and event handlers are correctly typed.
+- **Code Readability:** The code is more organized and easier to understand due to the clear type definitions.
+- **Maintainability:** Type safety helps prevent errors and makes it easier to maintain and refactor the form.
+
+
