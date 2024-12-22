@@ -1,6 +1,5 @@
 ![image](https://github.com/user-attachments/assets/e8119f10-8dc0-4355-8e96-0872eabc3bd7)
 
-
 # React-TS
 
 ## **React and TypeScript: A Powerful Combination**
@@ -739,11 +738,10 @@ const handleClick = (event: MyCustomEvent) => {
 - Consider using generics for more flexible event handling.
 - Define custom event interfaces for complex or custom events.
 
-
 ### Typing Form Event
 
 ```typescript
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 interface FormData {
   firstName: string;
@@ -752,15 +750,15 @@ interface FormData {
 
 function MyForm() {
   const [formData, setFormData] = useState<FormData>({
-    firstName: '',
-    lastName: '',
+    firstName: "",
+    lastName: "",
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value, 
+      [name]: value,
     }));
   };
 
@@ -768,12 +766,12 @@ function MyForm() {
     event.preventDefault(); // Prevent default form submission behavior
 
     // Process form data here (e.g., send to server)
-    console.log(formData); 
+    console.log(formData);
 
     // Reset form (optional)
     setFormData({
-      firstName: '',
-      lastName: '',
+      firstName: "",
+      lastName: "",
     });
   };
 
@@ -810,17 +808,21 @@ export default MyForm;
 **Explanation:**
 
 1. **`FormData` Interface:**
+
    - Defines the structure of the form data, ensuring type safety for the state.
 
 2. **`useState`:**
+
    - Initializes the `formData` state with an empty object.
 
 3. **`handleChange`:**
+
    - Handles input changes.
    - Extracts `name` and `value` from the event target.
    - Updates the `formData` state using the spread syntax and dynamic property access.
 
 4. **`handleSubmit`:**
+
    - Handles form submission.
    - `event.preventDefault()` prevents the default form submission behavior (page refresh).
    - Processes the form data (e.g., send to server).
@@ -838,4 +840,90 @@ export default MyForm;
 - **Code Readability:** The code is more organized and easier to understand due to the clear type definitions.
 - **Maintainability:** Type safety helps prevent errors and makes it easier to maintain and refactor the form.
 
+### Typing useReducer Hook
 
+```typescript
+import React, { useReducer } from "react";
+
+interface CounterState {
+  count: number;
+}
+
+type CounterAction =
+  | { type: "increment" }
+  | { type: "decrement" }
+  | { type: "reset" }
+  | { type: "incrementByAmount"; amount: number };
+
+const counterReducer = (
+  state: CounterState,
+  action: CounterAction
+): CounterState => {
+  switch (action.type) {
+    case "increment":
+      return { count: state.count + 1 };
+    case "decrement":
+      return { count: state.count - 1 };
+    case "reset":
+      return { count: 0 };
+    case "incrementByAmount":
+      return { count: state.count + action.amount };
+    default:
+      return state;
+  }
+};
+
+function Counter() {
+  const [state, dispatch] = useReducer(counterReducer, { count: 0 });
+
+  return (
+    <div>
+      <p>Count: {state.count}</p>
+      <button onClick={() => dispatch({ type: "increment" })}>Increment</button>
+      <button onClick={() => dispatch({ type: "decrement" })}>Decrement</button>
+      <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
+      <button
+        onClick={() => dispatch({ type: "incrementByAmount", amount: 5 })}
+      >
+        Increment by 5
+      </button>
+    </div>
+  );
+}
+
+export default Counter;
+```
+
+**Explanation:**
+
+1. **Interface for CounterState:**
+
+   - `CounterState` interface defines the shape of the state, which contains a single property `count` of type `number`.
+
+2. **CounterAction Union:**
+
+   - `CounterAction` is a union type that defines all possible actions that can be dispatched to the reducer.
+     - `increment`: Increases the count by 1.
+     - `decrement`: Decreases the count by 1.
+     - `reset`: Resets the count to 0.
+     - `incrementByAmount`: Increases the count by a specified amount.
+
+3. **counterReducer Function:**
+
+   - Takes the current `state` and an `action` as arguments.
+   - Uses a `switch` statement to handle different action types.
+   - Returns a new state object with the updated count based on the action.
+
+4. **useReducer Hook:**
+
+   - `useReducer` returns an array containing the current state and a dispatch function.
+   - The initial state is provided as the second argument to `useReducer`.
+
+5. **Button Click Handlers:**
+   - Dispatch the appropriate action objects to the reducer when buttons are clicked.
+
+**Key Points:**
+
+- **Type Safety:** The use of interfaces and unions ensures type safety for the state, actions, and reducer function.
+- **Code Clarity:** The code is more organized and easier to understand due to the clear type definitions and action handling logic.
+- **Maintainability:** Type safety and clear structure make the code more maintainable and less prone to errors.
