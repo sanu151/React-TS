@@ -98,6 +98,52 @@ While not strictly necessary, these extensions can significantly enhance your de
 
 Now you're ready to start developing your React application using TypeScript. You can create components, manage state, and use all the powerful features of both React and TypeScript.
 
+
+### Table summarizing various data types and their usage in React TypeScript:
+
+
+| Type | Description | Example |
+|---|---|---|
+| **Primitive Types** | | |
+| `string` | Represents text | `const name: string = 'John Doe';` |
+| `number` | Represents numerical values | `const age: number = 30;` |
+| `boolean` | Represents true or false values | `const isLoggedIn: boolean = true;` |
+| `null` | Represents the intentional absence of a value | `const myValue: null = null;` |
+| `undefined` | Represents a variable that has been declared but not assigned a value | `let myVariable: undefined;` |
+| `symbol` | Unique and immutable values | `const id: symbol = Symbol('uniqueID');` |
+| **Array Types** | | |
+| `string[]` | Array of strings | `const names: string[] = ['John', 'Jane', 'Doe'];` |
+| `number[]` | Array of numbers | `const numbers: number[] = [1, 2, 3, 4];` |
+| `boolean[]` | Array of booleans | `const flags: boolean[] = [true, false, true];` |
+| **Tuple Types** | | |
+| `[string, number]` | Tuple with a string and a number | `const myTuple: [string, number] = ['hello', 123];` |
+| **Object Types** | | |
+| `{ key: value }` | Object with key-value pairs | `const user: { name: string; age: number } = { name: 'John', age: 30 };` |
+| **Interface** | Defines the shape of an object | `interface User { name: string; age: number; }` |
+| **Type Alias** | Creates a new name for an existing type | `type UserId = number;` |
+| **Union Types** | Allows a variable to hold values of multiple types | `type MyType = string | number;` |
+| **Intersection Types** | Combines multiple types into a single type | `type UserWithRole = User & { role: string; };` |
+| **Conditional Types** | Types that depend on other types | `type IsString<T> = T extends string ? true : false;` |
+| **Generic Types** | | |
+| `<T>` | Represents a generic type parameter | `const genericFunction: <T>(arg: T) => T = (arg) => arg;` |
+| **React-Specific Types** | | |
+| `React.FC` | Functional Component | `const MyComponent: React.FC = () => { ... };` |
+| `React.ComponentProps` | Extracts props type from a component | `interface MyProps extends React.ComponentProps<typeof MyComponent> { ... }` |
+| `React.HTMLAttributes` | Props for HTML elements | `React.HTMLAttributes<HTMLDivElement>` |
+| `React.SVGAttributes` | Props for SVG elements | `React.SVGAttributes<SVGCircleElement>` | 
+| `React.CSSProperties` | CSS style properties | `style?: React.CSSProperties;` |
+| `React.ChangeEvent` | Event for input changes | `const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => { ... };` |
+| `React.MouseEvent` | Mouse events | `const handleClick = (event: React.MouseEvent) => { ... };` |
+| `React.KeyboardEvent` | Keyboard events | `const handleKeyPress = (event: React.KeyboardEvent) => { ... };` |
+
+**Additions:**
+
+* **`symbol`:** Represents unique and immutable values.
+* **`Intersection Types`:** Combines multiple types into a single type.
+* **`Conditional Types`:** Types that depend on other types.
+
+
+
 **Basic React Component in TypeScript:**
 
 ```typescript
